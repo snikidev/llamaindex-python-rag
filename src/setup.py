@@ -1,10 +1,22 @@
 import os
+import pymongo
+import logging
+import sys
 from dotenv import load_dotenv
-from llama_index.core import VectorStoreIndex, SimpleDirectoryReader, Settings
-from llama_index.embeddings.azure_openai import AzureOpenAIEmbedding
 from llama_index.llms.azure_openai import AzureOpenAI
+from llama_index.embeddings.azure_openai import AzureOpenAIEmbedding
+from llama_index.core import Settings
+from llama_index.vector_stores.azurecosmosmongo import (
+    AzureCosmosDBMongoDBVectorSearch,
+)
+
 
 load_dotenv()
+
+
+logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
+logging.getLogger().addHandler(logging.StreamHandler(stream=sys.stdout))
+
 
 Settings.llm = AzureOpenAI(
     engine="gpt-4o-mini",
@@ -12,6 +24,7 @@ Settings.llm = AzureOpenAI(
     azure_endpoint=os.environ.get('AZURE_OPENAI_ENDPOINT'),
     api_version="2024-05-01-preview",
 )
+
 
 Settings.embed_model = AzureOpenAIEmbedding(
     model="text-embedding-3-small",
@@ -21,13 +34,12 @@ Settings.embed_model = AzureOpenAIEmbedding(
     api_version='2023-05-15',
 )
 
-def main():
-    documents = SimpleDirectoryReader("data").load_data()
-    index = VectorStoreIndex.from_documents(documents)
-    query_engine = index.as_query_engine()
-    response = query_engine.query("Can we advertise online gambling to under 18 year olds?")
-    print(response)
+
+mongodb_client = pymongo.MongoClient(os.environ.get("AZURE_COSMOSDB_URI"))
 
 
-if __name__ == "__main__":
-    main()
+store = AzureCosmosDBMongoDBVectorSearch(
+    mongodb_client=mongodb_client,
+     db_name="gambitai",
+     collection_name="uk",
+)

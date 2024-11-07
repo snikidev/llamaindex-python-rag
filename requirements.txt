@@ -5,6 +5,7 @@ annotated-types==0.7.0
 anyio==4.6.0
 attrs==24.2.0
 azure-core==1.31.0
+azure-cosmos==4.7.0
 azure-identity==1.18.0
 beautifulsoup4==4.12.3
 certifi==2024.8.30
@@ -16,6 +17,7 @@ dataclasses-json==0.6.7
 Deprecated==1.2.14
 dirtyjson==1.0.8
 distro==1.9.0
+dnspython==2.7.0
 frozenlist==1.4.1
 fsspec==2024.9.0
 greenlet==3.1.1
@@ -29,7 +31,7 @@ llama-cloud==0.1.2
 llama-index==0.11.16
 llama-index-agent-openai==0.3.4
 llama-index-cli==0.3.1
-llama-index-core==0.11.16
+llama-index-core==0.11.20
 llama-index-embeddings-azure-openai==0.2.5
 llama-index-embeddings-openai==0.2.5
 llama-index-indices-managed-llama-cloud==0.4.0
@@ -41,6 +43,7 @@ llama-index-program-openai==0.2.0
 llama-index-question-gen-openai==0.2.0
 llama-index-readers-file==0.2.2
 llama-index-readers-llama-parse==0.3.0
+llama-index-vector-stores-azurecosmosmongo==0.2.0
 llama-parse==0.5.7
 marshmallow==3.22.0
 msal==1.31.0
@@ -60,6 +63,7 @@ pycparser==2.22
 pydantic==2.9.2
 pydantic_core==2.23.4
 PyJWT==2.9.0
+pymongo==4.10.1
 pypdf==4.3.1
 python-dateutil==2.9.0.post0
 python-dotenv==1.0.1
